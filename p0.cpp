@@ -64,5 +64,5 @@ int main()
     delete[] A;
     delete[] B;
 
-    return 0;
+    return 1;
 }
