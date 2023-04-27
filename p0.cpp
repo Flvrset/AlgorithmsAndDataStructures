@@ -7,7 +7,8 @@ struct Rekord
     char znak2;
 };
 
-void printArray(Rekord Arr[], int arr_len) {
+void printArray(Rekord Arr[], int arr_len)
+{
     for (int i = 0; i < arr_len; i++)
     {
         std::cout << Arr[i].znak1 << Arr[i].znak2 << " ";
@@ -34,7 +35,8 @@ int main()
 
     for (int i = 0; i < N; i++)
     {
-        if ((isalpha(P[i].znak1)) && (isalpha(P[i].znak2)) && ((abs(P[i].znak1 - 'a') / abs(P[i].znak2 - 'a') <= L) || P[i].znak2 - 'a' == 0))
+        int dist_2 = P[i].znak2 - 'a';
+        if (dist_2 != 0 && isalpha(P[i].znak1) && isalpha(P[i].znak2) && (abs(P[i].znak1 - 'a') / abs(dist_2) <= L))
         {
             size_a++;
             size_b--;
@@ -48,7 +50,8 @@ int main()
 
     for (int i = 0; i < N; i++)
     {
-        if ((isalpha(P[i].znak1)) && (isalpha(P[i].znak2)) && ((abs(P[i].znak1 - 'a') / abs(P[i].znak2 - 'a') <= L) || P[i].znak2 - 'a' == 0))
+        int dist_2 = P[i].znak2 - 'a';
+        if (dist_2 != 0 && isalpha(P[i].znak1) && isalpha(P[i].znak2) && (abs(P[i].znak1 - 'a') / abs(P[i].znak2 - 'a') <= L))
             A[count_a++] = P[i];
         else
             B[count_b++] = P[i];
@@ -58,7 +61,6 @@ int main()
     printArray(A, count_a);
 
     std::cout << "\nDruga tablica dynamiczna: \n";
-    for (int i = 0; i < count_b; i++)
     printArray(B, count_b);
 
     delete[] A;
