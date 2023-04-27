@@ -35,8 +35,12 @@ int main()
 
     for (int i = 0; i < N; i++)
     {
-        int dist_2 = P[i].znak2 - 'a';
-        if (dist_2 != 0 && isalpha(P[i].znak1) && isalpha(P[i].znak2) && (abs(P[i].znak1 - 'a') / abs(dist_2) <= L))
+        int dist_1 = abs(P[i].znak1 - 'a');
+        int dist_2 = abs(P[i].znak2 - 'a');
+        if (dist_2 != 0 &&
+            isalpha(P[i].znak1) &&
+            isalpha(P[i].znak2) &&
+            dist_1 / dist_2 <= L)
         {
             size_a++;
             size_b--;
@@ -50,8 +54,12 @@ int main()
 
     for (int i = 0; i < N; i++)
     {
-        int dist_2 = P[i].znak2 - 'a';
-        if (dist_2 != 0 && isalpha(P[i].znak1) && isalpha(P[i].znak2) && (abs(P[i].znak1 - 'a') / abs(P[i].znak2 - 'a') <= L))
+        int dist_1 = abs(P[i].znak1 - 'a');
+        int dist_2 = abs(P[i].znak2 - 'a');
+        if (dist_2 != 0 &&
+            isalpha(P[i].znak1) &&
+            isalpha(P[i].znak2) &&
+            dist_1 / dist_2 <= L)
             A[count_a++] = P[i];
         else
             B[count_b++] = P[i];
