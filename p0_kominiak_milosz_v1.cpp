@@ -1,5 +1,4 @@
 #include <iostream>
-#include <cctype>
 
 struct Rekord
 {
