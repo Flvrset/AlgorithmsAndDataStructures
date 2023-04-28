@@ -6,7 +6,18 @@ struct Film
     std::string title;
     std::string director;
     int prodYear;
+    Film *nast;
 };
+
+void printFilm(Film *adres)
+{
+    std::cout << "Zawartosc listy\n";
+    while (adres != NULL)
+    {
+        std::cout << adres->title << ", " << adres->director << ", " << adres->prodYear << std::endl;
+        adres = adres->nast;
+    }
+}
 
 int main()
 {
