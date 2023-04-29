@@ -19,18 +19,46 @@ void printFilm(Film *adres)
     }
 }
 
+void deleteFilm(Film *adres)
+{
+    Film *aktualny;
+    while (adres != NULL)
+    {
+        aktualny = adres;
+        adres=adres->nast;
+        delete aktualny;
+    }
+    
+}
+
 int main()
 {
     const int N = 3;
 
-    Film lista[N];
-    for (int i = 0; i < N; i++)
+    Film *glowa, *aktualny, *ogon, *usuwany;
+    glowa = new Film;
+    std::cout << "Podaj tytul filmu 1" << std::endl;
+    std::cin >> glowa->title;
+    std::cout << "Podaj rezysera filmu 1" << std::endl;
+    std::cin >> glowa->director;
+    std::cout << "Podaj rok produkcji filmu 1" << std::endl;
+    std::cin >> glowa->prodYear;
+    glowa->nast = NULL;
+    ogon = glowa;
+
+    for (int i = 1; i < N; i++)
     {
+        aktualny = new Film;
         std::cout << "Podaj tytul filmu " << i << std::endl;
-        std::cin >> lista[i].title;
+        std::cin >> aktualny->title;
         std::cout << "Podaj rezysera filmu " << i << std::endl;
-        std::cin >> lista[i].director;
+        std::cin >> aktualny->director;
         std::cout << "Podaj rok produkcji filmu " << i << std::endl;
-        std::cin >> lista[i].prodYear;
+        std::cin >> aktualny->prodYear;
+        aktualny->nast = NULL;
+        ogon->nast = aktualny;
+        ogon = aktualny;
     }
+    printFilm(glowa);
+
 }
