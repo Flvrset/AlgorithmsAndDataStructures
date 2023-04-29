@@ -25,17 +25,16 @@ void deleteFilm(Film *adres)
     while (adres != NULL)
     {
         aktualny = adres;
-        adres=adres->nast;
+        adres = adres->nast;
         delete aktualny;
     }
-    
 }
 
 int main()
 {
     const int N = 3;
 
-    Film *glowa, *aktualny, *ogon, *usuwany;
+    Film *glowa, *aktualny, *ogon, *usuwany, *poprzedni;
     glowa = new Film;
     std::cout << "Podaj tytul filmu 1" << std::endl;
     std::cin >> glowa->title;
@@ -61,4 +60,15 @@ int main()
     }
     printFilm(glowa);
 
+    aktualny = glowa;
+    poprzedni = new Film;
+    poprzedni = NULL;
+    int count = 0;
+    while (aktualny != NULL)
+    {
+        if (poprzedni != NULL && poprzedni->prodYear < aktualny->prodYear)
+            
+        poprzedni = aktualny;
+        aktualny = aktualny->nast;
+    }
 }
