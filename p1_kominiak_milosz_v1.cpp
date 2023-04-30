@@ -19,7 +19,7 @@ void printFilm(Film *adres)
     }
 }
 
-void deleteFilm(Film *adres)
+void deleteFilm(Film *&adres)
 {
     Film *aktualny;
     while (adres != NULL)
@@ -32,9 +32,9 @@ void deleteFilm(Film *adres)
 
 int main()
 {
-    const int N = 3;
+    const int N = 4;
 
-    Film *glowa, *aktualny, *ogon, *usuwany, *poprzedni;
+    Film *glowa, *aktualny, *ogon, *usuwany, *poprzedni, *nowy, *tmp1, *tmp2;
     glowa = new Film;
     std::cout << "Podaj tytul filmu 1" << std::endl;
     std::cin >> glowa->title;
@@ -45,7 +45,7 @@ int main()
     glowa->nast = NULL;
     ogon = glowa;
 
-    for (int i = 1; i < N; i++)
+    for (int i = 2; i < N + 1; i++)
     {
         aktualny = new Film;
         std::cout << "Podaj tytul filmu " << i << std::endl;
@@ -61,14 +61,40 @@ int main()
     printFilm(glowa);
 
     aktualny = glowa;
-    poprzedni = new Film;
     poprzedni = NULL;
     int count = 0;
     while (aktualny != NULL)
     {
         if (poprzedni != NULL && poprzedni->prodYear < aktualny->prodYear)
-            
-        poprzedni = aktualny;
-        aktualny = aktualny->nast;
+            count++;
+
+        if (poprzedni != NULL && poprzedni->prodYear < aktualny->prodYear && count == 2)
+        {
+            poprzedni->nast = aktualny->nast;
+            usuwany = aktualny;
+            aktualny = aktualny->nast;
+            delete usuwany;
+            nowy = new Film;
+            std::cout << "Podaj tytul nowego filmu" << std::endl;
+            std::cin >> nowy->title;
+            std::cout << "Podaj rezysera nowego filmu" << std::endl;
+            std::cin >> nowy->director;
+            std::cout << "Podaj rok produkcji nowego filmu" << std::endl;
+            std::cin >> nowy->prodYear;
+            tmp1 = glowa->nast;
+            tmp2 = tmp1->nast;
+            tmp1->nast = nowy;
+            nowy->nast = tmp2;
+            break;
+        }
+        else
+        {
+            poprzedni = aktualny;
+            aktualny = aktualny->nast;
+        }
     }
+
+    printFilm(glowa);
+    deleteFilm(glowa);
+    printFilm(glowa);
 }
