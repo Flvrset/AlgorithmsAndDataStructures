@@ -11,16 +11,20 @@ struct Film
 
 void printFilm(Film *adres)
 {
-    std::cout << "Zawartosc listy\n";
-    while (adres != NULL)
-    {
-        std::cout << adres->title << ", " << adres->director << ", " << adres->prodYear << std::endl;
-        adres = adres->nast;
-    }
+    std::cout << "Zawartosc listy:\n";
+    if (adres == NULL)
+        std::cout << "Lista pusta\n";
+    else
+        while (adres != NULL)
+        {
+            std::cout << adres->title << ", " << adres->director << ", " << adres->prodYear << std::endl;
+            adres = adres->nast;
+        }
 }
 
 void deleteFilm(Film *&adres)
 {
+    std::cout << "Usuwam liste od adresu: " << adres << std::endl;
     Film *aktualny;
     while (adres != NULL)
     {
@@ -28,6 +32,7 @@ void deleteFilm(Film *&adres)
         adres = adres->nast;
         delete aktualny;
     }
+    std::cout << "Usuwanie zakonczone!" << std::endl;
 }
 
 int main()
