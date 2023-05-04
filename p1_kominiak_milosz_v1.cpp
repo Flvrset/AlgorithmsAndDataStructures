@@ -41,14 +41,22 @@ int main()
 
     Film *glowa, *aktualny, *ogon, *usuwany, *poprzedni, *nowy, *tmp1, *tmp2;
     glowa = new Film;
-    std::cout << "Podaj tytul filmu 1" << std::endl;
-    std::cin >> glowa->title;
-    std::cout << "Podaj rezysera filmu 1" << std::endl;
-    std::cin >> glowa->director;
-    std::cout << "Podaj rok produkcji filmu 1" << std::endl;
-    std::cin >> glowa->prodYear;
-    glowa->nast = NULL;
-    ogon = glowa;
+    if (N > 0)
+    {
+        std::cout << "Podaj tytul filmu 1" << std::endl;
+        std::cin >> glowa->title;
+        std::cout << "Podaj rezysera filmu 1" << std::endl;
+        std::cin >> glowa->director;
+        std::cout << "Podaj rok produkcji filmu 1" << std::endl;
+        std::cin >> glowa->prodYear;
+        glowa->nast = NULL;
+        ogon = glowa;
+    }
+    else
+    {
+        glowa = NULL;
+        ogon = NULL;
+    }
 
     for (int i = 2; i < N + 1; i++)
     {
@@ -70,26 +78,15 @@ int main()
     int count = 0;
     while (aktualny != NULL)
     {
-        if (poprzedni != NULL && poprzedni->prodYear < aktualny->prodYear)
+        if (poprzedni != NULL && poprzedni->prodYear > aktualny->prodYear)
             count++;
 
-        if (poprzedni != NULL && poprzedni->prodYear < aktualny->prodYear && count == 2)
+        if (poprzedni != NULL && poprzedni->prodYear > aktualny->prodYear && count == 2)
         {
             poprzedni->nast = aktualny->nast;
             usuwany = aktualny;
             aktualny = aktualny->nast;
             delete usuwany;
-            nowy = new Film;
-            std::cout << "Podaj tytul nowego filmu" << std::endl;
-            std::cin >> nowy->title;
-            std::cout << "Podaj rezysera nowego filmu" << std::endl;
-            std::cin >> nowy->director;
-            std::cout << "Podaj rok produkcji nowego filmu" << std::endl;
-            std::cin >> nowy->prodYear;
-            tmp1 = glowa->nast;
-            tmp2 = tmp1->nast;
-            tmp1->nast = nowy;
-            nowy->nast = tmp2;
             break;
         }
         else
@@ -98,7 +95,20 @@ int main()
             aktualny = aktualny->nast;
         }
     }
-
+    if (glowa->nast != NULL)
+    {
+        nowy = new Film;
+        std::cout << "Podaj tytul nowego filmu" << std::endl;
+        std::cin >> nowy->title;
+        std::cout << "Podaj rezysera nowego filmu" << std::endl;
+        std::cin >> nowy->director;
+        std::cout << "Podaj rok produkcji nowego filmu" << std::endl;
+        std::cin >> nowy->prodYear;
+        tmp1 = glowa->nast;
+        tmp2 = tmp1->nast;
+        tmp1->nast = nowy;
+        nowy->nast = tmp2;
+    }
     printFilm(glowa);
     deleteFilm(glowa);
     printFilm(glowa);
