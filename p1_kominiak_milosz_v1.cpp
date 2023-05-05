@@ -95,7 +95,7 @@ int main()
             aktualny = aktualny->nast;
         }
     }
-    if (glowa->nast != NULL)
+    if (glowa != NULL && glowa->nast != NULL)
     {
         nowy = new Film;
         std::cout << "Podaj tytul nowego filmu" << std::endl;
