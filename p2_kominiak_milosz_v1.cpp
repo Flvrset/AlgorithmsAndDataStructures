@@ -36,49 +36,48 @@ void printFilm(Film *adres)
         }
 }
 
-void addFilm(Film **adres, std::string title, std::string director, int prodYear)
+void addFilm(Film *&adres, std::string title, std::string director, int prodYear)
 {
-    Film *nowy = new Film();
-    Film *ogon = *adres;
+    Film *nowy = new Film;
     nowy->title = title;
     nowy->director = director;
     nowy->prodYear = prodYear;
-    nowy->nast = NULL;
-    if (*adres == NULL)
+    nowy->nast = nullptr;
+    if (adres == nullptr)
     {
-        *adres = nowy;
+        adres = nowy;
         return;
     }
-    while (ogon->nast != NULL)
-        ogon = ogon->nast;
-
-    ogon->nast = nowy;
+    Film *aktualny = adres;
+    while (aktualny->nast != nullptr)
+        aktualny = aktualny->nast;
+    aktualny->nast = nowy;
     return;
 }
 
-void theFunction(Film *glowa, char charToFind, std::string title, std::string director, int prodYear, int nthElement, std::string header)
+void theFunction(Film *&glowa, char charToFind, std::string title, std::string director, int prodYear, int nthElement, std::string header)
 {
-    Film *aktualny = glowa;
-    Film *poprzedni = glowa;
+    Film *aktualny2 = glowa;
+    Film *poprzedni = NULL;
     Film *usuwany = new Film();
 
     std::cout << header << std::endl;
     printFilm(glowa);
-    while (aktualny != NULL)
+    while (aktualny2 != NULL)
     {
-        if (aktualny->title.find(charToFind) && glowa->prodYear > aktualny->prodYear)
+        if (aktualny2->title.find(charToFind) && glowa->prodYear > aktualny2->prodYear)
         {
-            if (aktualny->nast == NULL)
+            if (aktualny2->nast == NULL)
                 poprzedni->nast = NULL;
             else
-                poprzedni->nast = aktualny->nast;
-            usuwany = aktualny;
-            aktualny = aktualny->nast;
+                poprzedni->nast = aktualny2->nast;
+            usuwany = aktualny2;
+            aktualny2 = aktualny2->nast;
             delete usuwany;
             continue;
         }
-        poprzedni = aktualny;
-        aktualny = aktualny->nast;
+        poprzedni = aktualny2;
+        aktualny2 = aktualny2->nast;
     }
     std::cout << header << std::endl;
     printFilm(glowa);
@@ -94,7 +93,7 @@ void theFunction(Film *glowa, char charToFind, std::string title, std::string di
 
 int main()
 {
-    Film *glowa = new Film;
+    Film *glowa = nullptr;
     std::ifstream dane;
     std::string nazwa, title_temp, director_temp;
     int prodYear_temp;
@@ -112,8 +111,9 @@ int main()
         director_temp = "";
         prodYear_temp = 0;
         dane >> title_temp >> director_temp >> prodYear_temp;
-        addFilm(&glowa, title_temp, director_temp, prodYear_temp);
+        addFilm(glowa, title_temp, director_temp, prodYear_temp);
     }
+    printFilm(glowa);
     dane.close();
     theFunction(glowa, 'b', "x", "rez_x", 1999, 2, "dzialaajj");
     deleteFilm(glowa);
