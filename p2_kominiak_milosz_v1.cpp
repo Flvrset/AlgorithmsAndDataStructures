@@ -87,17 +87,17 @@ void theFunction(Film *glowa, char charToFind, std::string title, std::string di
     Film *ogon = poprzedni;
     aktualny = glowa;
     poprzedni = nullptr;
-    Film *nowy = new Film();
     int count = 0;
-    nowy->director = director;
-    nowy->title = title;
-    nowy->prodYear = prodYear;
     while (aktualny != NULL)
     {
         if (aktualny->prodYear > ogon->prodYear)
             count++;
         if (aktualny->prodYear > ogon->prodYear && count % nthElement == 0)
         {
+            Film *nowy = new Film();
+            nowy->director = director;
+            nowy->title = title;
+            nowy->prodYear = prodYear;
             nowy->nast = aktualny;
             poprzedni->nast = nowy;
         }
@@ -131,7 +131,7 @@ int main()
         addFilm(glowa, title_temp, director_temp, prodYear_temp);
     }
     dane.close();
-    theFunction(glowa, 'b', "x", "rez_x", 1999, 2, "dzialaajj");
+    theFunction(glowa, 'b', "x", "rez_x", 1999, 2, "naglowek");
     deleteFilm(glowa);
     return 0;
 }
