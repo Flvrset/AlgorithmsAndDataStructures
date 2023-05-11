@@ -34,44 +34,54 @@ void bubbleSort(int tablica[], int dlugosc)
 
 int main()
 {
-    int T7_quick[7] = {9, 3, 3, 6, 8, 5, 7};
-    int T20_quick[20] = {9, 3, 3, 6, 8, 5, 7, 19, 18, 17, 18, 5, 6, 100, 3, 5, 6, 4, 99, 2};
-    int T50_quick[50] = {9, 3, 3, 6, 8, 5, 7, 19, 18, 17, 18, 5, 6, 100, 3, 5, 6, 4, 99, 2, 3, 3, 6, 8, 5, 7, 19, 18, 17, 18, 5, 6, 100, 3, 5, 6, 4, 99, 2, 4, 15, 23, 54, 12, 23, 45, 65, 3, 42, 23};
+    const int small = 10000, medium = 50000, large = 100000;
+    int TSmall[small], TMedium[medium], TLarge[large];
+    std::srand(time(NULL));
 
-    int T7_bubble[7] = {9, 3, 3, 6, 8, 5, 7};
-    int T20_bubble[20] = {9, 3, 3, 6, 8, 5, 7, 19, 18, 17, 18, 5, 6, 100, 3, 5, 6, 4, 99, 2};
-    int T50_bubble[50] = {9, 3, 3, 6, 8, 5, 7, 19, 18, 17, 18, 5, 6, 100, 3, 5, 6, 4, 99, 2, 3, 3, 6, 8, 5, 7, 19, 18, 17, 18, 5, 6, 100, 3, 5, 6, 4, 99, 2, 4, 15, 23, 54, 12, 23, 45, 65, 3, 42, 23};
+    std::cout << "Uzupelniam tablice losowymi liczbami...\n";
+    for (int i = 0; i < small; i++)
+        TSmall[i] = std::rand();
+    for (int i = 0; i < medium; i++)
+        TMedium[i] = std::rand();
+    for (int i = 0; i < large; i++)
+        TLarge[i] = std::rand();
 
     std::cout << "Licze czas wykonywania algorytmow...\n";
-    auto start_quickSort7 = std::chrono::high_resolution_clock::now();
-    quickSort(T7_quick, 0, 6);
-    auto stop_quickSort7 = std::chrono::high_resolution_clock::now();
-    auto duration_quickSort7 = std::chrono::duration_cast<std::chrono::nanoseconds>(stop_quickSort7 - start_quickSort7).count();
-    auto start_bubbleSort7 = std::chrono::high_resolution_clock::now();
-    bubbleSort(T7_bubble, 7);
-    auto stop_bubbleSort7 = std::chrono::high_resolution_clock::now();
-    auto duration_bubbleSort7 = std::chrono::duration_cast<std::chrono::nanoseconds>(stop_bubbleSort7 - start_bubbleSort7).count();
+    auto start_quickSortSmall = std::chrono::high_resolution_clock::now();
+    quickSort(TSmall, 0, small - 1);
+    auto stop_quickSortSmall = std::chrono::high_resolution_clock::now();
+    auto duration_quickSortSmall = std::chrono::duration_cast<std::chrono::milliseconds>(stop_quickSortSmall - start_quickSortSmall).count();
+    auto start_bubbleSortSmall = std::chrono::high_resolution_clock::now();
+    bubbleSort(TSmall, small);
+    auto stop_bubbleSortSmall = std::chrono::high_resolution_clock::now();
+    auto duration_bubbleSortSmall = std::chrono::duration_cast<std::chrono::milliseconds>(stop_bubbleSortSmall - start_bubbleSortSmall).count();
 
-    auto start_quickSort20 = std::chrono::high_resolution_clock::now();
-    quickSort(T20_quick, 0, 19);
-    auto stop_quickSort20 = std::chrono::high_resolution_clock::now();
-    auto duration_quickSort20 = std::chrono::duration_cast<std::chrono::nanoseconds>(stop_quickSort20 - start_quickSort20).count();
-    auto start_bubbleSort20 = std::chrono::high_resolution_clock::now();
-    bubbleSort(T20_bubble, 20);
-    auto stop_bubbleSort20 = std::chrono::high_resolution_clock::now();
-    auto duration_bubbleSort20 = std::chrono::duration_cast<std::chrono::nanoseconds>(stop_bubbleSort20 - start_bubbleSort20).count();
+    auto start_quickSortMedium = std::chrono::high_resolution_clock::now();
+    quickSort(TMedium, 0, medium - 1);
+    auto stop_quickSortMedium = std::chrono::high_resolution_clock::now();
+    auto duration_quickSortMedium = std::chrono::duration_cast<std::chrono::milliseconds>(stop_quickSortMedium - start_quickSortMedium).count();
+    auto start_bubbleSortMedium = std::chrono::high_resolution_clock::now();
+    bubbleSort(TMedium, medium);
+    auto stop_bubbleSortMedium = std::chrono::high_resolution_clock::now();
+    auto duration_bubbleSortMedium = std::chrono::duration_cast<std::chrono::milliseconds>(stop_bubbleSortMedium - start_bubbleSortMedium).count();
 
-    auto start_quickSort50 = std::chrono::high_resolution_clock::now();
-    quickSort(T50_quick, 0, 49);
-    auto stop_quickSort50 = std::chrono::high_resolution_clock::now();
-    auto duration_quickSort50 = std::chrono::duration_cast<std::chrono::nanoseconds>(stop_quickSort50 - start_quickSort50).count();
-    auto start_bubbleSort50 = std::chrono::high_resolution_clock::now();
-    bubbleSort(T50_bubble, 50);
-    auto stop_bubbleSort50 = std::chrono::high_resolution_clock::now();
-    auto duration_bubbleSort50 = std::chrono::duration_cast<std::chrono::nanoseconds>(stop_bubbleSort50 - start_bubbleSort50).count();
+    auto start_quickSortLarge = std::chrono::high_resolution_clock::now();
+    quickSort(TLarge, 0, large - 1);
+    auto stop_quickSortLarge = std::chrono::high_resolution_clock::now();
+    auto duration_quickSortLarge = std::chrono::duration_cast<std::chrono::milliseconds>(stop_quickSortLarge - start_quickSortLarge).count();
+    auto start_bubbleSortLarge = std::chrono::high_resolution_clock::now();
+    bubbleSort(TLarge, large);
+    auto stop_bubbleSortLarge = std::chrono::high_resolution_clock::now();
+    auto duration_bubbleSortLarge = std::chrono::duration_cast<std::chrono::milliseconds>(stop_bubbleSortLarge - start_bubbleSortLarge).count();
 
-    std::cout << "Dla list o dlugosci 7:\n" << "quickSort: " << duration_quickSort7 << " ns" << std::endl << "bubbleSort: " << duration_bubbleSort7 << " ns" << std::endl;
-    std::cout << "Dla list o dlugosci 20:\n" << "quickSort: " << duration_quickSort20 << " ns" << std::endl << "bubbleSort: " << duration_bubbleSort20 << " ns" << std::endl;
-    std::cout << "Dla list o dlugosci 50:\n" << "quickSort: " << duration_quickSort50 << " ns" << std::endl << "bubbleSort: " << duration_bubbleSort50 << " ns" << std::endl;
+    std::cout << "Dla list o dlugosci " << small << ":\n"
+              << "quickSort: " << duration_quickSortSmall << " ms" << std::endl
+              << "bubbleSort: " << duration_bubbleSortSmall << " ms" << std::endl;
+    std::cout << "Dla list o dlugosci " << medium << ":\n"
+              << "quickSort: " << duration_quickSortMedium << " ms" << std::endl
+              << "bubbleSort: " << duration_bubbleSortMedium << " ms" << std::endl;
+    std::cout << "Dla list o dlugosci " << large << ":\n"
+              << "quickSort: " << duration_quickSortLarge << " ms" << std::endl
+              << "bubbleSort: " << duration_bubbleSortLarge << " ms" << std::endl;
     return 0;
 }
