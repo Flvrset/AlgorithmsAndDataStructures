@@ -44,7 +44,7 @@ void bubbleSort(int tablica[], int dlugosc)
 
 int main()
 {
-    const int small = 10, medium = 50000, large = 100000;
+    const int small = 1000, medium = 50000, large = 100000;
     int TSmall_quick[small], TSmall_bubble[small], TMedium_quick[medium], TMedium_bubble[medium], TLarge_quick[large], TLarge_bubble[large], random;
     std::srand(time(NULL));
 
