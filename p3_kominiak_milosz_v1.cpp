@@ -4,7 +4,8 @@
 void checkIfSorted(int tablica[], int dlugosc)
 {
     for (int i = 1; i < dlugosc; i++)
-        if (tablica[i] < tablica[i - 1]) {
+        if (tablica[i] < tablica[i - 1])
+        {
             std::cout << "Tablica nieposortowana prawidlowo\n";
             break;
         }
@@ -60,7 +61,8 @@ int main()
         TMedium_quick[i] = random;
         TMedium_bubble[i] = random;
     }
-    for (int i = 0; i < large; i++){
+    for (int i = 0; i < large; i++)
+    {
         random = std::rand();
         TLarge_quick[i] = random;
         TLarge_bubble[i] = random;
